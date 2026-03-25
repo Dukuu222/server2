@@ -94,7 +94,7 @@ def delete():
     key = request.json.get("key", "").upper()
     data = _load()
     if key in data:
-        data[key]["status"] = "deleted"
+        del data[key]
         _save(data)
     return jsonify({"ok": True})
 
