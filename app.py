@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+﻿from flask import Flask, request, jsonify
 import json, os, secrets, string
 from datetime import datetime, timedelta
 from functools import wraps
@@ -8,7 +8,7 @@ app = Flask(__name__)
 KEYS_FILE  = os.path.join(os.path.dirname(__file__), "keys.json")
 ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "change-this-secret-token")
 
-# ── Хранилище ─────────────────────────────────────────────────────────────────
+# в”Ђв”Ђ РҐСЂР°РЅРёР»РёС‰Рµ в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 def _load():
     if not os.path.exists(KEYS_FILE):
         return {}
@@ -19,7 +19,7 @@ def _save(data):
     with open(KEYS_FILE, "w") as f:
         json.dump(data, f, indent=2)
 
-# ── Авторизация админа ────────────────────────────────────────────────────────
+# в”Ђв”Ђ РђРІС‚РѕСЂРёР·Р°С†РёСЏ Р°РґРјРёРЅР° в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 def require_admin(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
@@ -29,7 +29,7 @@ def require_admin(f):
         return f(*args, **kwargs)
     return wrapper
 
-# ── Публичный эндпоинт: проверка ключа ───────────────────────────────────────
+# в”Ђв”Ђ РџСѓР±Р»РёС‡РЅС‹Р№ СЌРЅРґРїРѕРёРЅС‚: РїСЂРѕРІРµСЂРєР° РєР»СЋС‡Р° в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 @app.route("/validate", methods=["POST"])
 def validate():
     key = request.json.get("key", "").strip().upper()
@@ -46,7 +46,7 @@ def validate():
         return jsonify({"ok": False, "msg": "Key has expired"})
     return jsonify({"ok": True, "msg": "OK", "expire": entry["expire"]})
 
-# ── Админ эндпоинты ───────────────────────────────────────────────────────────
+# в”Ђв”Ђ РђРґРјРёРЅ СЌРЅРґРїРѕРёРЅС‚С‹ в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 @app.route("/admin/generate", methods=["POST"])
 @require_admin
 def generate():
@@ -100,3 +100,4 @@ def delete():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
